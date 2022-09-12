@@ -1,13 +1,15 @@
-const canvas = document.querySelector('canvas');
-const c = canvas.getContext('2d');
+const canvas1 = document.getElementById('canvas1');
+const c1 = canvas1.getContext('2d');
+const canvas2 = document.getElementById('canvas2');
+const c2 = canvas2.getContext('2d');
 
 function dashes() {
-  for (let i = 0; i < (canvas.height / 10); i++) {
-    c.beginPath();
-    c.moveTo(canvas.width / 2,  5 + (i * 20));    
-    c.lineTo(canvas.width / 2, 15 + (i * 20));
-    c.stroke();
-    c.closePath();
+  for (let i = 0; i < (canvas1.height / 10); i++) {
+    c1.beginPath();
+    c1.moveTo(canvas1.width / 2,  5 + (i * 20));    
+    c1.lineTo(canvas1.width / 2, 15 + (i * 20));
+    c1.stroke();
+    c1.closePath();
   }
 }
 
@@ -18,17 +20,17 @@ const playerOne = {
   x: 10,
   y: 0,
   deltaY: 5,
-  top: canvas.height / 2 - 25,
-  bottom: canvas.height / 2 + 25,
-  scoreX: (canvas.width / 4) - 20,
+  top: canvas1.height / 2 - 25,
+  bottom: canvas1.height / 2 + 25,
+  scoreX: (canvas1.width / 4) - 20,
   score: 0,
   
   draw: function() {
-    c.beginPath();
-    c.moveTo(this.x, this.top    - this.y);
-    c.lineTo(this.x, this.bottom - this.y);
-    c.stroke();
-    c.closePath();
+    c1.beginPath();
+    c1.moveTo(this.x, this.top    - this.y);
+    c1.lineTo(this.x, this.bottom - this.y);
+    c1.stroke();
+    c1.closePath();
   },
   
   up: function() {
@@ -40,7 +42,7 @@ const playerOne = {
   },
 
   passedBottom: function() {
-    return this.bottom - this.y >= canvas.height;
+    return this.bottom - this.y >= canvas1.height;
   },
 
   passedTop: function() {
@@ -48,15 +50,15 @@ const playerOne = {
   },
   
   scoreDraw: function() {
-    c.font = '48px arial';    
-    c.fillText(this.score, this.scoreX, 50, 40);
+    c1.font = '48px arial';    
+    c1.fillText(this.score, this.scoreX, 50, 40);
   }
 };
   
 const playerTwo = {
   x: 490,
   score: 0,
-  scoreX: (3 * canvas.width / 4) - 20
+  scoreX: (3 * canvas1.width / 4) - 20
 };
 Object.setPrototypeOf(playerTwo, playerOne);
 playerTwo.up();
@@ -107,12 +109,12 @@ const ball = {
   p1WonLastPoint: true,
   
   init: function() {
-    this.x = canvas.width / 2 - this.ballSize / 2;
-    this.y = randomNum(this.ballSize, canvas.height - this.ballSize);
+    this.x = canvas1.width / 2 - this.ballSize / 2;
+    this.y = randomNum(this.ballSize, canvas1.height - this.ballSize);
   },
 
   draw: function() {
-    c.fillRect(this.x, this.y, this.ballSize, this.ballSize);
+    c1.fillRect(this.x, this.y, this.ballSize, this.ballSize);
   },
   
   move: function () {
@@ -142,7 +144,7 @@ const ball = {
 // }
   
   changeDirection: function () {
-    if (this.y + this.ballSize >= canvas.height
+    if (this.y + this.ballSize >= canvas1.height
        || this.y <= 0) {
       this.deltaY = -this.deltaY;
       wallSound.play();
@@ -150,7 +152,7 @@ const ball = {
   },
   
   reset: function() {
-    if (this.x > canvas.width) {
+    if (this.x > canvas1.width) {
       this.init();
       playerOne.score++;
       this.p1WonLastPoint == true;
@@ -182,7 +184,7 @@ ball.init();
 
 function animate () {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  c1.clearRect(0, 0, canvas1.width, canvas1.height);
 
   keys();
 

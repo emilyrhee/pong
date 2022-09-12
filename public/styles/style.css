@@ -2,3 +2,15 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+canvas {
+  border: 1px solid #d3d3d3
+}
+
+#canvas2 {
+  background: #cdcdcd;
+}
+
+#wrapper > * {
+  position: absolute;
+}
