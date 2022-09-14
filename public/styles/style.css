@@ -4,11 +4,11 @@ html, body {
 }
 
 canvas {
-  border: 1px solid #d3d3d3
+  border: 1px solid #d3d3d3;
 }
 
 #canvas2 {
-  background: #cdcdcd;
+  background: #FFFFFF;
 }
 
 #wrapper > * {
