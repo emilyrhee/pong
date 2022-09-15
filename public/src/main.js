@@ -61,8 +61,10 @@ const playerOne = {
   },
   
   scoreDraw: function() {
-   pC.font = '48px arial';    
-   pC.fillText(this.score, this.scoreX, 50, 40);
+   pC.font = '48px arial';   
+   sC.textBaseline = 'middle'; 
+   sC.textAlign = 'center';  
+   pC.fillText(this.score, this.scoreX, 50);
   }
 };
   
