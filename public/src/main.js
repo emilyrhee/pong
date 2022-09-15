@@ -3,6 +3,17 @@ const c1 = canvas1.getContext('2d');
 const canvas2 = document.getElementById('canvas2');
 const c2 = canvas2.getContext('2d');
 
+canvas2.addEventListener('click', (event) => {
+  canvas2.remove();
+});
+
+function startGame() {
+  c2.font = '50px arial';
+  c2.textBaseline = 'middle'; 
+  c2.textAlign = 'center'; 
+  c2.fillText("click to start", canvas2.width / 2, canvas2.height / 2);
+}
+
 function dashes() {
   for (let i = 0; i < (canvas1.height / 10); i++) {
     c1.beginPath();
@@ -185,6 +196,9 @@ ball.init();
 function animate () {
   requestAnimationFrame(animate);
   c1.clearRect(0, 0, canvas1.width, canvas1.height);
+  c2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+  startGame();
 
   keys();
 
