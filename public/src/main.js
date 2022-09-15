@@ -1,26 +1,26 @@
-const canvas1 = document.getElementById('canvas1');
-const c1 = canvas1.getContext('2d');
-const canvas2 = document.getElementById('canvas2');
-const c2 = canvas2.getContext('2d');
+const pongCanvas = document.getElementById('pongCanvas');
+const pC = pongCanvas.getContext('2d');
+const startCanvas = document.getElementById('startCanvas');
+const sC = startCanvas.getContext('2d');
 
-canvas2.addEventListener('click', (event) => {
-  canvas2.remove();
+startCanvas.addEventListener('click', (event) => {
+  startCanvas.remove();
 });
 
 function startGame() {
-  c2.font = '50px arial';
-  c2.textBaseline = 'middle'; 
-  c2.textAlign = 'center'; 
-  c2.fillText("click to start", canvas2.width / 2, canvas2.height / 2);
+  sC.font = '50px arial';
+  sC.textBaseline = 'middle'; 
+  sC.textAlign = 'center'; 
+  sC.fillText("click to start", startCanvas.width / 2, startCanvas.height / 2);
 }
 
 function dashes() {
-  for (let i = 0; i < (canvas1.height / 10); i++) {
-    c1.beginPath();
-    c1.moveTo(canvas1.width / 2,  5 + (i * 20));    
-    c1.lineTo(canvas1.width / 2, 15 + (i * 20));
-    c1.stroke();
-    c1.closePath();
+  for (let i = 0; i < (pongCanvas.height / 10); i++) {
+   pC.beginPath();
+   pC.moveTo(pongCanvas.width / 2,  5 + (i * 20));    
+   pC.lineTo(pongCanvas.width / 2, 15 + (i * 20));
+   pC.stroke();
+   pC.closePath();
   }
 }
 
@@ -31,17 +31,17 @@ const playerOne = {
   x: 10,
   y: 0,
   deltaY: 5,
-  top: canvas1.height / 2 - 25,
-  bottom: canvas1.height / 2 + 25,
-  scoreX: (canvas1.width / 4) - 20,
+  top: pongCanvas.height / 2 - 25,
+  bottom: pongCanvas.height / 2 + 25,
+  scoreX: (pongCanvas.width / 4) - 20,
   score: 0,
   
   draw: function() {
-    c1.beginPath();
-    c1.moveTo(this.x, this.top    - this.y);
-    c1.lineTo(this.x, this.bottom - this.y);
-    c1.stroke();
-    c1.closePath();
+   pC.beginPath();
+   pC.moveTo(this.x, this.top    - this.y);
+   pC.lineTo(this.x, this.bottom - this.y);
+   pC.stroke();
+   pC.closePath();
   },
   
   up: function() {
@@ -53,7 +53,7 @@ const playerOne = {
   },
 
   passedBottom: function() {
-    return this.bottom - this.y >= canvas1.height;
+    return this.bottom - this.y >= pongCanvas.height;
   },
 
   passedTop: function() {
@@ -61,15 +61,15 @@ const playerOne = {
   },
   
   scoreDraw: function() {
-    c1.font = '48px arial';    
-    c1.fillText(this.score, this.scoreX, 50, 40);
+   pC.font = '48px arial';    
+   pC.fillText(this.score, this.scoreX, 50, 40);
   }
 };
   
 const playerTwo = {
   x: 490,
   score: 0,
-  scoreX: (3 * canvas1.width / 4) - 20
+  scoreX: (3 * pongCanvas.width / 4) - 20
 };
 Object.setPrototypeOf(playerTwo, playerOne);
 playerTwo.up();
@@ -120,12 +120,12 @@ const ball = {
   p1WonLastPoint: true,
   
   init: function() {
-    this.x = canvas1.width / 2 - this.ballSize / 2;
-    this.y = randomNum(this.ballSize, canvas1.height - this.ballSize);
+    this.x = pongCanvas.width / 2 - this.ballSize / 2;
+    this.y = randomNum(this.ballSize, pongCanvas.height - this.ballSize);
   },
 
   draw: function() {
-    c1.fillRect(this.x, this.y, this.ballSize, this.ballSize);
+   pC.fillRect(this.x, this.y, this.ballSize, this.ballSize);
   },
   
   move: function () {
@@ -155,7 +155,7 @@ const ball = {
 // }
   
   changeDirection: function () {
-    if (this.y + this.ballSize >= canvas1.height
+    if (this.y + this.ballSize >= pongCanvas.height
        || this.y <= 0) {
       this.deltaY = -this.deltaY;
       wallSound.play();
@@ -163,7 +163,7 @@ const ball = {
   },
   
   reset: function() {
-    if (this.x > canvas1.width) {
+    if (this.x > pongCanvas.width) {
       this.init();
       playerOne.score++;
       this.p1WonLastPoint == true;
@@ -195,8 +195,8 @@ ball.init();
 
 function animate () {
   requestAnimationFrame(animate);
-  c1.clearRect(0, 0, canvas1.width, canvas1.height);
-  c2.clearRect(0, 0, canvas2.width, canvas2.height);
+  pC.clearRect(0, 0, pongCanvas.width, pongCanvas.height);
+  sC.clearRect(0, 0, startCanvas.width, startCanvas.height);
 
   startGame();
 
