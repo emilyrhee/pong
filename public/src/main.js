@@ -1,11 +1,13 @@
-const pongCanvas = document.getElementById('pongCanvas');
-const pC = pongCanvas.getContext('2d');
 const startCanvas = document.getElementById('startCanvas');
 const sC = startCanvas.getContext('2d');
 
-startCanvas.addEventListener('click', (event) => {
-  startCanvas.remove();
-});
+const pongCanvas = document.createElement("canvas");
+pongCanvas.id = "pongCanvas"
+const pC = pongCanvas.getContext('2d');
+pongCanvas.width = startCanvas.width;
+pongCanvas.height = startCanvas.height;
+
+const wrapper = document.getElementById("wrapper");
 
 function startGame() {
   sC.font = '50px arial';
@@ -13,6 +15,15 @@ function startGame() {
   sC.textAlign = 'center'; 
   sC.fillText("click to start", startCanvas.width / 2, startCanvas.height / 2);
 }
+
+gameStarted = false;
+
+startCanvas.addEventListener('click', (event) => {
+  startCanvas.remove();
+  gameStarted = true;
+  wrapper.insertBefore(pongCanvas, startCanvas.nextSibling);
+});
+
 
 function dashes() {
   for (let i = 0; i < (pongCanvas.height / 10); i++) {
@@ -201,7 +212,7 @@ function animate () {
   sC.clearRect(0, 0, startCanvas.width, startCanvas.height);
 
   startGame();
-
+  
   keys();
 
   dashes();
@@ -213,7 +224,8 @@ function animate () {
   playerTwo.scoreDraw();
 
   if (gameStarted == true) {
-  ball.move();
-  ball.reset();
+    ball.move();
+    ball.reset();
+  }
 }
 animate();
