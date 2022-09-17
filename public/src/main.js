@@ -212,6 +212,7 @@ function animate () {
   playerOne.scoreDraw();
   playerTwo.scoreDraw();
 
+  if (gameStarted == true) {
   ball.move();
   ball.reset();
 }
