@@ -53,8 +53,8 @@ const playerOne = {
    pC.lineTo(this.x, this.bottom - this.y);
    pC.stroke();
    pC.closePath();
-  },
-  
+  },  
+
   up: function() {
     this.y += this.deltaY;
   },
@@ -95,7 +95,7 @@ function keys(){
     if (!playerOne.passedTop()) {
       playerOne.up();
     }
-  } else if (keyMap["f"]) {
+  } else if (keyMap["a"]) {
     if (!playerOne.passedBottom()) {
       playerOne.down();
     }
@@ -105,7 +105,7 @@ function keys(){
     if (!playerTwo.passedTop()) {
       playerTwo.up();
     }
-  } else if (keyMap["j"]) {
+  } else if (keyMap["l"]) {
     if (!playerTwo.passedBottom()) {
       playerTwo.down();
     }
@@ -156,16 +156,6 @@ const ball = {
 
     this.bounceBack();
   },
-
-// moveLeft: function () {
-//   this.x += -this.deltaX; 
-//   this.y += -this.deltaY;
-// },
-
-// moveRight: function() {
-//   this.x += this.deltaX; 
-//   this.y += this.deltaY;
-// }
   
   changeDirection: function () {
     if (this.y + this.ballSize >= pongCanvas.height
