@@ -91,7 +91,7 @@ playerTwo.down();
 var keyMap = {};
 
 function keys(){
-  if (keyMap["d"]) {
+  if (keyMap["s"]) {
     if (!playerOne.passedTop()) {
       playerOne.up();
     }
@@ -140,7 +140,7 @@ const ball = {
   draw: function() {
    pC.fillRect(this.x, this.y, this.ballSize, this.ballSize);
   },
-  
+
   move: function () {
     this.changeDirection();
 
